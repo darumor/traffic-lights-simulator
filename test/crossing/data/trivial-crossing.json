@@ -1,0 +1,46 @@
+{
+  "name": "trivial-crossing-1",
+  "nodes": [
+    {"id": "node-east-in"},
+    {"id": "node-west-in"},
+    {"id": "node-south-out"},
+    {"id": "node-south-merge"}
+  ],
+  "entries": [
+    {"id": "node-east-in"},
+    {"id": "node-west-in"}
+  ],
+  "exits": [
+    {"id": "node-south-out"}
+  ],
+  "arcs": [
+    {
+      "id": "arc-1",
+      "start": "node-east-in",
+      "end": "node-south-merge",
+      "length": "100",
+      "blocks": ["arc-2"]
+    },
+    {
+      "id": "arc-2",
+      "start": "node-west-in",
+      "end": "node-south-merge",
+      "length": "100",
+      "blocks": ["arc-1"]
+    },
+    {
+      "id": "arc-3",
+      "start": "node-south-merge",
+      "end": "node-south-out",
+      "length": "50",
+      "blocks": []
+    }
+  ]
+}
+
+
+
+
+
+
+

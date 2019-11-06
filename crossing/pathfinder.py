@@ -1,25 +1,49 @@
 class PathFinder:
 
     def __init__(self, network):
-        self.network = network
+        self.graph = network
 
     def print_path(self, entry_node_id, exit_node_id):
         print self.find_path(entry_node_id, exit_node_id)
 
+    def search(self, current_node, target_node):
+        print current_node
+        paths = []
+        if current_node.id == target_node.id:
+            return PathFinder.Path([current_node])
+
+        for exit_arc in current_node.exits:
+            print 'exit:'
+            print exit_arc
+            steps = [current_node, exit_arc]
+            steps.extend(self.search(exit_arc.end, target_node).path_items)
+            print 'steps:'
+            temp_steps = map(lambda s: s.id, steps)
+            print temp_steps
+            print 'target:'
+            print target_node.id
+
+            if map(lambda s: s.id, steps).__contains__(target_node.id):
+                paths.append(PathFinder.Path(steps))
+        if paths:
+            paths.sort(key=lambda p: p.length(), reverse=True)
+            print 'returning:'
+            print paths[0]
+            return paths[0]
+        return PathFinder.Path()
+
     def find_path(self, entry_node_id, exit_node_id):
-        path = PathFinder.Path()
-        path.append(self.network.nodes[entry_node_id])
-
-        # todo tähän varsinainen etsintäalgoritmi
-
-
-
-        path.append(self.network.nodes[exit_node_id])
-        return path
+        path = self.search(self.graph.nodes[entry_node_id], self.graph.nodes[exit_node_id])
+        if path.path_items:
+            return path
+        else:
+            raise Exception("Path not found")
 
     class Path:
-        def __init__(self):
-            self.path_items = []
+        def __init__(self, path_items=None):
+            if path_items is None:
+                path_items = []
+            self.path_items = path_items
 
         def __str__(self):
             return map(lambda i: i.id, self.path_items).__str__()
@@ -27,10 +51,13 @@ class PathFinder:
         def append(self, path_item):
             self.path_items.append(path_item)
 
-    class PathItem:
-        def __init__(self, item):
-            self.id = item.id
-            self.type = item.type
+        def append_all(self, path_items):
+            for item in path_items:
+                self.path_items.append(item)
 
-        def __str__(self):
-            return '{self.type}:{self.id}'.format(self=self)
+        def length(self):
+            length = 0
+            for item in self.path_items:
+                if item.type == 'Arc':
+                    length = length + item.length
+            return length

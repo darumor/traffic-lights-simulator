@@ -1,2 +1,2 @@
-import network
+import graph
 import pathfinder
