@@ -1,7 +1,7 @@
 import unittest
 
-from crossing.graph import Graph
-from crossing.pathfinder import PathFinder
+from src.crossing import Graph
+from src.crossing import PathFinder
 
 
 class TestUnitPathFinder(unittest.TestCase):

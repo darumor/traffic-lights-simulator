@@ -1,2 +1,3 @@
-# Traffic ligths simulator - Todos
+# Traffic Ligths Simulator - Todos
 
+[] graphviz
