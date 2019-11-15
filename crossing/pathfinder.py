@@ -7,28 +7,17 @@ class PathFinder:
         print self.find_path(entry_node_id, exit_node_id)
 
     def search(self, current_node, target_node):
-        print current_node
         paths = []
         if current_node.id == target_node.id:
             return PathFinder.Path([current_node])
 
         for exit_arc in current_node.exits:
-            print 'exit:'
-            print exit_arc
             steps = [current_node, exit_arc]
             steps.extend(self.search(exit_arc.end, target_node).path_items)
-            print 'steps:'
-            temp_steps = map(lambda s: s.id, steps)
-            print temp_steps
-            print 'target:'
-            print target_node.id
-
             if map(lambda s: s.id, steps).__contains__(target_node.id):
                 paths.append(PathFinder.Path(steps))
         if paths:
             paths.sort(key=lambda p: p.length(), reverse=True)
-            print 'returning:'
-            print paths[0]
             return paths[0]
         return PathFinder.Path()
 
