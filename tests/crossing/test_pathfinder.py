@@ -1,7 +1,7 @@
 import unittest
 
-from trafficlightssimulator.crossing import Graph
-from trafficlightssimulator.crossing import PathFinder
+from trafficlightssimulator.crossing.graph import Graph
+from trafficlightssimulator.crossing.pathfinder import PathFinder
 
 
 class TestUnitPathFinder(unittest.TestCase):
@@ -14,5 +14,4 @@ class TestUnitPathFinder(unittest.TestCase):
         path_finder.print_path("node-west-in", "node-south-out")
 
         assert map(lambda p: p.id, path_finder.find_path("node-west-in", "node-south-out").path_items) == \
-               ["node-west-in", "arc-2", "node-south-merge", "arc-3", "node-south-out"]
-
+            ["node-west-in", "arc-2", "node-south-merge", "arc-3", "node-south-out"]

@@ -91,7 +91,6 @@ class Graph:
             string += ' Exits: ' + map(lambda e: e.id, self.exits).__str__()
             return string
 
-
     class Arc:
         def __init__(self, arc_data, network):
             self.id = arc_data["id"]

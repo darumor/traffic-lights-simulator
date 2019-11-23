@@ -1,7 +1,7 @@
 import unittest
 from trivial_tickee import TrivialTickee
+from trafficlightssimulator.world.ticker import Ticker
 
-from trafficlightssimulator.world import Ticker
 
 class TestUnitTicker(unittest.TestCase):
 
