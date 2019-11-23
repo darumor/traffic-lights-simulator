@@ -1,13 +1,13 @@
 import unittest
 
-from src.crossing import Graph
-from src.crossing import PathFinder
+from trafficlightssimulator.crossing import Graph
+from trafficlightssimulator.crossing import PathFinder
 
 
 class TestUnitPathFinder(unittest.TestCase):
 
     def test_trivial_path(self):
-        crossing_data_json_file_name = 'data/trivial-crossing.json'
+        crossing_data_json_file_name = 'tests/crossing/data/trivial-crossing.json'
 
         graph = Graph(crossing_data_json_file_name)
         path_finder = PathFinder(graph)
