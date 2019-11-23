@@ -1,0 +1,152 @@
+{
+  "name": "t-crossing-1",
+  "nodes": [
+    {"id": "node-east-in"},
+    {"id": "node-west-in"},
+    {"id": "node-south-in"},
+    {"id": "node-east-out"},
+    {"id": "node-west-out"},
+    {"id": "node-south-out"},
+    {"id": "node-south-split"},
+    {"id": "node-south-merge"},
+    {"id": "node-west-exit"},
+    {"id": "node-east-exit"},
+    {"id": "node-south-exit-east"},
+    {"id": "node-south-exit-west"},
+    {"id": "node-south-east-turn"},
+    {"id": "node-south-west-turn"},
+    {"id": "node-east-straight-turn"},
+    {"id": "node-west-straight-turn"}
+  ],
+  "entries": [
+    {"id": "node-east-in"},
+    {"id": "node-west-in"},
+    {"id": "node-south-in"}
+  ],
+  "exits": [
+    {"id": "node-east-out"},
+    {"id": "node-west-out"},
+    {"id": "node-south-out"}
+  ],
+  "arcs": [
+    {
+      "id": "arc-1",
+      "start": "node-east-in",
+      "end": "node-east-straight-turn",
+      "length": "100",
+      "blocks": []
+    },
+    {
+      "id": "arc-2",
+      "start": "node-west-in",
+      "end": "node-west-straight-turn",
+      "length": "100",
+      "blocks": []
+    },
+    {
+      "id": "arc-3",
+      "start": "node-south-in",
+      "end": "node-south-split",
+      "length": "50",
+      "blocks": []
+    },
+    {
+      "id": "arc-4",
+      "start": "node-south-split",
+      "end": "node-south-east-turn",
+      "length": "50",
+      "blocks": []
+    },
+    {
+      "id": "arc-5",
+      "start": "node-south-split",
+      "end": "node-south-west-turn",
+      "length": "50",
+      "blocks": []
+    },
+    {
+      "id": "arc-6",
+      "start": "node-south-west-turn",
+      "end": "node-west-exit",
+      "length": "20",
+      "blocks": ["arc-8", "arc-9", "arc-11"]
+    },
+    {
+      "id": "arc-7",
+      "start": "node-south-east-turn",
+      "end": "node-east-exit",
+      "length": "20",
+      "blocks": ["arc-11"]
+    },
+    {
+      "id": "arc-8",
+      "start": "node-east-straight-turn",
+      "end": "node-south-exit-east",
+      "length": "20",
+      "blocks": ["arc-6", "arc-11"]
+    },
+    {
+      "id": "arc-9",
+      "start": "node-east-straight-turn",
+      "end": "node-west-exit",
+      "length": "20",
+      "blocks": ["arc-6"]
+    },
+    {
+      "id": "arc-10",
+      "start": "node-west-straight-turn",
+      "end": "node-south-exit-west",
+      "length": "20",
+      "blocks": []
+    },
+    {
+      "id": "arc-11",
+      "start": "node-west-straight-turn",
+      "end": "node-east-exit",
+      "length": "20",
+      "blocks": ["arc-6", "arc-7", "arc-8"]
+    },
+    {
+      "id": "arc-12",
+      "start": "node-west-exit",
+      "end": "node-west-out",
+      "length": "100",
+      "blocks": []
+    },
+    {
+      "id": "arc-13",
+      "start": "node-east-exit",
+      "end": "node-east-out",
+      "length": "100",
+      "blocks": []
+    },
+    {
+      "id": "arc-14",
+      "start": "node-south-exit-east",
+      "end": "node-south-merge",
+      "length": "50",
+      "blocks": []
+    },
+    {
+      "id": "arc-15",
+      "start": "node-south-exit-west",
+      "end": "node-south-merge",
+      "length": "50",
+      "blocks": []
+    },
+    {
+      "id": "arc-16",
+      "start": "node-south-merge",
+      "end": "node-south-out",
+      "length": "50",
+      "blocks": []
+    }
+  ]
+}
+
+
+
+
+
+
+
