@@ -2,7 +2,7 @@
 
 - [x] Create data structure for describing crossings 
 - [x] Implement path finding algorithm  
-- [ ] Re-structure the project for automataed build and tests  
+- [x] Re-structure the project for automated build and tests  
 - [ ] Implement cars as software
 - [ ] Implement sensors as software
 - [ ] Create lights controller
