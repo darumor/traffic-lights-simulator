@@ -1,7 +1,7 @@
 class PathFinder:
 
-    def __init__(self, network):
-        self.graph = network
+    def __init__(self, graph):
+        self.graph = graph
 
     def print_path(self, entry_node_id, exit_node_id):
         print self.find_path(entry_node_id, exit_node_id)

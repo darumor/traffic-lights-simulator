@@ -5,7 +5,7 @@
 ## General
 
 * The idea is to create a simulator of crossings with traffic lights and traffic.
-* Traffic through the crossings is controlled by the traffic ligths. 
+* Traffic through the crossings is controlled by the traffic lights. 
 * Traffic lights are controlled by a controller that can be replaced and developed independently of the crossing itself.
 * The engine tries to maximize the throughput through the network and minimize the waiting time for individual cars (and pedestrians)
 * The goal is to find the ultimate traffic light controller, learn bunch of stuff and have fun while doing it.
@@ -20,3 +20,15 @@
 * Roads and crossings are defined as directed graph data structure.
 * Individual cars etc. each have entry points and exit points.
 * Path finding algorithm is used to find correct path through the crossing
+
+## Things to optimize
+* maximize total throughput of the crossing (all traffic)
+* minimize total waiting time
+* minimize waiting time of an individual
+* equalize waiting time of individuals
+* minimize light changing overhead
+* prevent starvation of any route
+* prepare for sensor malfunction
+
+
+## Random thoughts
