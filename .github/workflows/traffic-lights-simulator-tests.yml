@@ -1,4 +1,4 @@
-name: Python application
+name: Traffic Lights Simulator
 
 on: [push]
 

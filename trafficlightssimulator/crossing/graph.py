@@ -73,13 +73,15 @@ class Graph:
         return output_dict
 
     class Node:
-        def __init__(self, node_data, network):
+        def __init__(self, node_data, graph):
             self.id = node_data["id"]
             self.type = 'Node'
             self.entries = []                                    # arcs
             self.exits = []                                      # arcs
             self.is_entry = False
             self.is_exit = False
+            self.signal = 0
+            self.graph = graph
 
         def __str__(self):
             string = self.id + ' '
@@ -99,6 +101,8 @@ class Graph:
             self.end = network.nodes[arc_data["end"]]              # node
             self.length = int(arc_data["length"])
             self.blocks = []                                       # arcs
+            self.open = True                                       # semaphore
+            self.blocked = False                                   # semaphore
             network.nodes[self.start.id].exits.append(self)
             network.nodes[self.end.id].entries.append(self)
 

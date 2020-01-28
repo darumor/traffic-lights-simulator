@@ -11,10 +11,14 @@ class TrafficLightsSimulator:
 
         self.graph = Graph(self.crossing_data_json_file_name)
         self.classifier = Classifier(self.ticker)
-        self.crossing = Crossing(self.graph, self.classifier)
+        self.crossing = Crossing(self.ticker, self.graph, self.classifier)
         self.generator = Generator(self.graph)
         self.stream = Stream(self.crossing, self.generator, self.ticker)
         self.controller = Controller(self.graph, self.ticker)
 
     def start(self):
-        self.ticker.run()
+        threads = [self.ticker]
+        for t in threads:
+            t.start()
+            t.join()
+        self.classifier.report()

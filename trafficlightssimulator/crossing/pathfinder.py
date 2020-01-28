@@ -33,6 +33,15 @@ class PathFinder:
             if path_items is None:
                 path_items = []
             self.path_items = path_items
+            self.next_item_by_item_id = {}
+            key_item = None
+            for item in self.path_items:
+                if key_item is not None:
+                    self.next_item_by_item_id[key_item.id] = item
+                key_item = item
+
+        def get_next_item(self, item_id):
+            return self.next_item_by_item_id[item_id]
 
         def __str__(self):
             return map(lambda i: i.id, self.path_items).__str__()

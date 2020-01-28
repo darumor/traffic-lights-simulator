@@ -8,6 +8,7 @@ class Classifier:
         self.total_waiting_time = 0                             # minimize
         self.average_waiting_time = 0                           # minimize
         self.mean_square_error_in_waiting_times = 0             # minimize
+        self.max_route_waiting_time = 0                         # minimize
 
         ticker.register_entity(self)
 
@@ -27,25 +28,44 @@ class Classifier:
         self.route_waiting_times[route_id] = 0
 
     def report(self):
-        print "classifier-report"
+        self.analyze()
+        print """
+-------- classifier-report --------
+  Throughput: %d
+  Total waiting time: %d
+  Average waiting time: %d
+  Error in waiting times: %d
+  Light changing time: %d
+  Max route waiting time: %d
+-----------------------------------""" % (self.throughput,
+                                             self.total_waiting_time,
+                                             self.average_waiting_time,
+                                             self.mean_square_error_in_waiting_times,
+                                             self.light_change_time,
+                                             self. max_route_waiting_time)
 
     def tick(self, world=None):
+        print "classifier: tick"
         for route_id, time in self.route_waiting_times:
-            self.route_waiting_times[route_id] = time + 1
+            new_time = time + 1
+            if new_time > self.max_route_waiting_time:
+                self.max_route_waiting_time = new_time
+            self.route_waiting_times[route_id] = new_time
 
     # ---------------- INTERNAL --------------
 
     def calculate_time_values(self):
-        self.total_waiting_time = 0
-        for individual_id, time in self.individual_waiting_times:
-            self.total_waiting_time = self.total_waiting_time + time
-        self.average_waiting_time = self.total_waiting_time / self.individual_waiting_times.__len__()
+        if self.individual_waiting_times.__len__() > 0:
+            self.total_waiting_time = 0
+            for individual_id, time in self.individual_waiting_times:
+                self.total_waiting_time = self.total_waiting_time + time
+            self.average_waiting_time = self.total_waiting_time / self.individual_waiting_times.__len__()
 
-        total_squares = 0
-        for individual_id, time in self.individual_waiting_times:
-            total_squares = total_squares + pow(self.average_waiting_time - time, 2)
+            total_squares = 0
+            for individual_id, time in self.individual_waiting_times:
+                total_squares = total_squares + pow(self.average_waiting_time - time, 2)
 
-        self.mean_square_error_in_waiting_times = total_squares / self.individual_waiting_times.__len__()
+            self.mean_square_error_in_waiting_times = total_squares / self.individual_waiting_times.__len__()
 
     def analyze(self):
         self.calculate_time_values()
