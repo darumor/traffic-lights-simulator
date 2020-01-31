@@ -1,4 +1,5 @@
 import unittest
+import json
 
 from trafficlightssimulator.traffic.generator import Generator
 from trafficlightssimulator.crossing.graph import Graph
@@ -7,14 +8,18 @@ from trafficlightssimulator.crossing.graph import Graph
 class TestUnitGenerator(unittest.TestCase):
 
     def test_simple(self):
-        trivial_crossing_filename = '../crossing/data/trivial-crossing.json'
-        graph = Graph(trivial_crossing_filename)
+        trivial_crossing_filename = 'tests/crossing/data/trivial-crossing.json'
+        with open(trivial_crossing_filename, 'r') as f:
+            graph_data = json.load(f)
+        graph = Graph(graph_data)
         generator = Generator(graph, {'min_interval': 1, 'max_interval': 10, 'number_of_cars': 20, 'car_speed': 20, 'car_speed_variation': 2})
         assert generator.traffic.__len__() == 20
 
     def test_batch(self):
-        trivial_crossing_filename = '../crossing/data/trivial-crossing.json'
-        graph = Graph(trivial_crossing_filename)
+        trivial_crossing_filename = 'tests/crossing/data/trivial-crossing.json'
+        with open(trivial_crossing_filename, 'r') as f:
+            graph_data = json.load(f)
+        graph = Graph(graph_data)
         generator = Generator(graph, {'min_interval': 1, 'max_interval': 20, 'number_of_cars': 50, 'car_speed': 20, 'car_speed_variation': 2})
         timestamp = 0
         cars = []
@@ -29,8 +34,10 @@ class TestUnitGenerator(unittest.TestCase):
         assert 50 <= timestamp <= 1000
 
     def test_reset(self):
-        trivial_crossing_filename = '../crossing/data/trivial-crossing.json'
-        graph = Graph(trivial_crossing_filename)
+        trivial_crossing_filename = 'tests/crossing/data/trivial-crossing.json'
+        with open(trivial_crossing_filename, 'r') as f:
+            graph_data = json.load(f)
+        graph = Graph(graph_data)
         generator = Generator(graph, {'min_interval': 1, 'max_interval': 20, 'number_of_cars': 20, 'car_speed': 20, 'car_speed_variation': 2})
         timestamp = 0
         cars = []

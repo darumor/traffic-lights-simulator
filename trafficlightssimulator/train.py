@@ -1,10 +1,12 @@
+import json
 from crossing import Graph
 from controller import Controller
 from world import Ticker
 
 crossing_data_json_file_name = 'crossing/data/t-crossing.json'
-
-graph = Graph(crossing_data_json_file_name)
+with open(crossing_data_json_file_name, 'r') as f:
+    graph_data = json.load(f)
+graph = Graph(graph_data)
 controller = Controller(graph)
 
 ticker = Ticker()

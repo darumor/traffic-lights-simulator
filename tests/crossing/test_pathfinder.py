@@ -1,4 +1,5 @@
 import unittest
+import json
 
 from trafficlightssimulator.crossing.graph import Graph
 from trafficlightssimulator.crossing.pathfinder import PathFinder
@@ -7,9 +8,10 @@ from trafficlightssimulator.crossing.pathfinder import PathFinder
 class TestUnitPathFinder(unittest.TestCase):
 
     def test_trivial_path(self):
-        crossing_data_json_file_name = 'tests/crossing/data/trivial-crossing.json'
-
-        graph = Graph(crossing_data_json_file_name)
+        trivial_crossing_filename = 'tests/crossing/data/trivial-crossing.json'
+        with open(trivial_crossing_filename, 'r') as f:
+            graph_data = json.load(f)
+        graph = Graph(graph_data)
         path_finder = PathFinder(graph)
         path_finder.print_path("node-west-in", "node-south-out")
 

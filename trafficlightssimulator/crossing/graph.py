@@ -1,20 +1,15 @@
-import json
-
 
 class Graph:
-    def __init__(self, json_file):
-        with open(json_file, 'r') as f:
-            data = json.load(f)
-
-        self.name = data["name"]
+    def __init__(self, graph_data={}):
+        self.name = graph_data["name"]
         self.nodes = {}
-        self.init_nodes(data["nodes"])
+        self.init_nodes(graph_data["nodes"])
         self.arcs = {}
-        self.init_arcs(data["arcs"])
+        self.init_arcs(graph_data["arcs"])
         self.entries = []
-        self.init_entries(data["entries"])
+        self.init_entries(graph_data["entries"])
         self.exits = []
-        self.init_exits(data["exits"])
+        self.init_exits(graph_data["exits"])
 
 #        print self
 
