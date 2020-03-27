@@ -1,3 +1,6 @@
+from arc import Arc
+from node import Node
+
 
 class Graph:
     def __init__(self, graph_data={}):
@@ -16,13 +19,13 @@ class Graph:
     def init_nodes(self, nodes_data):
         nodes = {}
         for node in nodes_data:
-            nodes[node["id"]] = Graph.Node(node, self)
+            nodes[node["id"]] = Node(node, self)
         self.nodes = self.clean_duplicates_dict(nodes)
 
     def init_arcs(self, arcs_data):
         arcs = {}
         for arc in arcs_data:
-            arcs[arc["id"]] = Graph.Arc(arc, self)
+            arcs[arc["id"]] = Arc(arc, self)
         for arc in arcs_data:
             for blocked_arc in arc["blocks"]:
                 arcs[arc["id"]].blocks.append(arcs[blocked_arc])
@@ -67,44 +70,4 @@ class Graph:
             output_dict[key] = value
         return output_dict
 
-    class Node:
-        def __init__(self, node_data, graph):
-            self.id = node_data["id"]
-            self.type = 'Node'
-            self.entries = []                                    # arcs
-            self.exits = []                                      # arcs
-            self.is_entry = False
-            self.is_exit = False
-            self.signal = 0
-            self.graph = graph
 
-        def __str__(self):
-            string = self.id + ' '
-            if self.is_entry:
-                string += '(entry) '
-            if self.is_exit:
-                string += '(exit) '
-            string += 'Entries: ' + map(lambda e: e.id, self.entries).__str__()
-            string += ' Exits: ' + map(lambda e: e.id, self.exits).__str__()
-            return string
-
-    class Arc:
-        def __init__(self, arc_data, network):
-            self.id = arc_data["id"]
-            self.type = 'Arc'
-            self.start = network.nodes[arc_data["start"]]          # node
-            self.end = network.nodes[arc_data["end"]]              # node
-            self.length = int(arc_data["length"])
-            self.blocks = []                                       # arcs
-            self.open = True                                       # semaphore
-            self.blocked = False                                   # semaphore
-            network.nodes[self.start.id].exits.append(self)
-            network.nodes[self.end.id].entries.append(self)
-
-        def __str__(self):
-            string = self.id
-            string += ' Start: ' + self.start.id
-            string += ' End: ' + self.end.id
-            string += ' Length: ' + str(self.length)
-            string += ' Blocks: ' + map(lambda b: b.id, self.blocks).__str__()
-            return string

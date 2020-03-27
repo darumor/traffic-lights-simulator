@@ -31,4 +31,10 @@
 * prepare for sensor malfunction
 
 
+## Learned so far
+* python coding routine
+* python testing and project structure
+* crossings and traffic lights are no trivial problems
+
+
 ## Random thoughts
